@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     stages {
+
         stage('Build Backend Image') {
             steps {
                 sh 'docker build -t backend-app backend'
@@ -26,7 +27,7 @@ pipeline {
                 docker run -d --name nginx-lb \
                 --network lab6-net \
                 -p 80:80 \
-                -v $(pwd)/nginx/default.conf:/etc/nginx/conf.d/default.conf \
+                -v $(pwd)/nginx:/etc/nginx/conf.d \
                 nginx
                 '''
             }
