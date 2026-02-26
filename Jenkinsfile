@@ -13,6 +13,7 @@ pipeline {
             steps {
                 sh '''
                 docker rm -f backend1 backend2 nginx-lb || true
+                docker network rm lab6-net || true
                 docker network create lab6-net || true
 
                 docker run -d --name backend1 --network lab6-net backend-app
