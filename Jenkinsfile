@@ -8,15 +8,15 @@ pipeline {
                 sh 'docker build -t backend-app backend'
             }
         }
-
         stage('Setup Network') {
             steps {
                 sh '''
+                docker rm -f backend1 backend2 nginx-lb || true
                 docker network rm lab6-net || true
                 docker network create lab6-net
                 '''
-            }
-        }
+    }
+}
 
         stage('Run Backend Containers') {
             steps {
